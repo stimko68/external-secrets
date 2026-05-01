@@ -5378,6 +5378,56 @@ spec:
                         - authRef
                         - folderID
                       type: object
+                    keycard:
+                      description: Keycard configures this store to sync secrets using the Keycard provider.
+                      properties:
+                        auth:
+                          properties:
+                            workloadIdentity:
+                              properties:
+                                audiences:
+                                  description: Audiences sent to TokenRequest; Keycard will validate `aud` claim
+                                  items:
+                                    type: string
+                                  type: array
+                                serviceAccountRef:
+                                  description: ServiceAccountSelector is a reference to a ServiceAccount resource.
+                                  properties:
+                                    audiences:
+                                      description: |-
+                                        Audience specifies the `aud` claim for the service account token
+                                        If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity
+                                        then this audiences will be appended to the list
+                                      items:
+                                        type: string
+                                      type: array
+                                    name:
+                                      description: The name of the ServiceAccount resource being referred to.
+                                      maxLength: 253
+                                      minLength: 1
+                                      pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                                      type: string
+                                    namespace:
+                                      description: |-
+                                        Namespace of the resource being referred to.
+                                        Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+                                      maxLength: 63
+                                      minLength: 1
+                                      pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                                      type: string
+                                  required:
+                                    - name
+                                  type: object
+                              required:
+                                - serviceAccountRef
+                              type: object
+                          type: object
+                        url:
+                          description: URL configures the Keycard API URL. Defaults to https://api.keycard.ai/.
+                          type: string
+                      required:
+                        - auth
+                      type: object
                     kubernetes:
                       description: Kubernetes configures this store to sync secrets using a Kubernetes cluster provider
                       properties:
@@ -17488,6 +17538,56 @@ spec:
                       required:
                         - authRef
                         - folderID
+                      type: object
+                    keycard:
+                      description: Keycard configures this store to sync secrets using the Keycard provider.
+                      properties:
+                        auth:
+                          properties:
+                            workloadIdentity:
+                              properties:
+                                audiences:
+                                  description: Audiences sent to TokenRequest; Keycard will validate `aud` claim
+                                  items:
+                                    type: string
+                                  type: array
+                                serviceAccountRef:
+                                  description: ServiceAccountSelector is a reference to a ServiceAccount resource.
+                                  properties:
+                                    audiences:
+                                      description: |-
+                                        Audience specifies the `aud` claim for the service account token
+                                        If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity
+                                        then this audiences will be appended to the list
+                                      items:
+                                        type: string
+                                      type: array
+                                    name:
+                                      description: The name of the ServiceAccount resource being referred to.
+                                      maxLength: 253
+                                      minLength: 1
+                                      pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                                      type: string
+                                    namespace:
+                                      description: |-
+                                        Namespace of the resource being referred to.
+                                        Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+                                      maxLength: 63
+                                      minLength: 1
+                                      pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                                      type: string
+                                  required:
+                                    - name
+                                  type: object
+                              required:
+                                - serviceAccountRef
+                              type: object
+                          type: object
+                        url:
+                          description: URL configures the Keycard API URL. Defaults to https://api.keycard.ai/.
+                          type: string
+                      required:
+                        - auth
                       type: object
                     kubernetes:
                       description: Kubernetes configures this store to sync secrets using a Kubernetes cluster provider
